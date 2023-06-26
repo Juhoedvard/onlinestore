@@ -15,12 +15,6 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
-model Example {
-    id        String   @id @default(cuid())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-}
-
 // Necessary for Next auth
 model Account {
     id                String  @id @default(cuid())
@@ -56,6 +50,7 @@ model User {
     image         String?
     accounts      Account[]
     sessions      Session[]
+    Items         Item[]
 }
 
 model VerificationToken {
@@ -65,3 +60,29 @@ model VerificationToken {
 
     @@unique([identifier, token])
 }
+model Item {
+    id            String    @id @default(cuid())
+    product       String?
+    gategory      Gategory[]
+    price         Int
+    image         String?
+    creationDay   DateTime @default(now())
+    updatedAt     DateTime? @updatedAt
+    userID        String
+    user          User     @relation(fields: [userID], references: [id], onDelete: Cascade)
+
+}
+
+model Gategory {
+    id          String @id @default(cuid())
+    item        Item[]
+    electronics String
+    clothes     String
+    sports      String
+    music       String
+    cooking     String
+
+
+
+}
+
