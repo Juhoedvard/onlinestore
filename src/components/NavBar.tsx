@@ -3,13 +3,14 @@ import Link from "next/link";
 import Image from "next/image";
 
 export function NavBar()  {
+
     const { data : sessionData } = useSession();
     console.log(sessionData)
     const user = sessionData?.user
     console.log(user)
     return (
-        <div className="navbar bg-base-100 flex sticky">
-          <div className="flex-1">
+        <nav className="navbar bg-base-300 w-full z-20 top-0 sticky left-0 py-3">
+          <div className="flex-1 gap-4 ">
               <Link href="/">Onlinestore</Link>
               <div className="form-control align-self-center ">
               <input type="text" placeholder="Search" className="input input-bordered w-24 md:w-auto" />
@@ -29,7 +30,7 @@ export function NavBar()  {
                 <Link href="/create-post">Sell an item</Link>
                   <span>{user?.name}</span>
                 </div>
-                <div className="dropdown dropdown-end">
+                <div className="dropdown dropdown-end z-[1]">
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                     {user?.image &&
                     <div className="w-10 rounded-full">
@@ -41,7 +42,7 @@ export function NavBar()  {
                         />
                     </div>}
                   </label>
-                  <ul tabIndex={0} className="mt-3 p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+                  <ul tabIndex={0} className="mt-3 p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52 ">
                     <li>
                     <a className="justify-between">
                         Profile
@@ -54,6 +55,6 @@ export function NavBar()  {
                   </div>
               </div>)}
           </div>
-        </div>
+        </nav>
     )
   }
