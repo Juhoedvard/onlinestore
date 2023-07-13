@@ -19,11 +19,22 @@ type CreatePostForm = {
 const CreatePost: NextPage = () =>{
 
 
-    const post = api.item.create.useMutation();
-    const [image, setImage] = useState<string>('')
-    const {register, handleSubmit} = useForm<CreatePostForm>()
-    const { data: user } = useSession()
-    const router = useRouter()
+    const router = useRouter();
+    const ctx = api.useContext();
+    const post = api.item.create.useMutation({
+      onSuccess: () => {
+        void ctx.item.getAll.invalidate()
+        .then(() => {
+          router.push("/");
+          setImage('')
+        })
+      }
+    });
+    const [image, setImage] = useState<string>('');
+    const {register, handleSubmit} = useForm<CreatePostForm>();
+    const { data: user } = useSession({
+      required: true
+    });
 
     const onSubmit =  (formData: CreatePostForm) => {
       console.log(formData.image, "formdata")
@@ -32,9 +43,6 @@ const CreatePost: NextPage = () =>{
         ...formData,
         price: parseFloat(formData.price),
         image: image
-        }).then(() => {
-          router.push("/");
-          setImage('')
         })
     };
     const handleImage = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,7 +56,7 @@ const CreatePost: NextPage = () =>{
     }
     return(
         // eslint-disable-next-line @typescript-eslint/no-misused-promises
-        <form onSubmit={handleSubmit(onSubmit)} className=" flex gap-4 justify-center items-center min-h-screen md:h-auto bg-gradient-to-b  bg-[#55656d] ">
+        <form onSubmit={handleSubmit(onSubmit)} className=" flex gap-4 justify-center items-center min-h-screen md:h-auto bg-gradient-to-b  ">
           <div className="flex flex-col gap-4 items-center justify-center  ">
           <h2 className="align-middle text-xl bold ">Create a new post</h2>
             <label>Product name: </label>

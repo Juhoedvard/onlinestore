@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.body {
+    @apply text-white bg-[#55656d]
+
+}

@@ -16,25 +16,33 @@ const ItemDetails: NextPage =  () => {
         enabled: !!router.query.id,
     })
     return (
-        <main className="flex min-h-screen flex-col gap-10 bg-gradient-to-b items-center text-white bg-[#55656d]">
+        <main className="flex min-h-screen flex-col gap-10 bg-gradient-to-b items-center  text-white bg-[#55656d]">
             <nav className="flex w-4/5 z-20 top-0  left-0 py-3 ">
                 <Link href="/" className="a-link-normal  fixed a-color-tertiary">
                     Back to results
                 </Link>
             </nav>
             <br></br>
-            <h1 className="text-8xl">{post?.product}</h1>
-            <div className="flex gap-5">
-                <Image
-                src={Product}
-                width={400}
-                height={400}
-                alt=""
-                />
-                <div className=" flex flex-col gap-10">
-                    <p>{post?.description}</p>
-                    <p className=" border-t text-4xl">{post?.price} $</p>
-                    <button className="btn btn-accent">Button</button>
+            <div className="place-self-auto w-2/3 ">
+                <h1 className="text-6xl m-4 border-b p-2 text-center place-self-start ">{post?.product}</h1>
+            </div>
+            <div className="flex w-full h-full justify-center items-stretch gap-3">
+                 <Image
+                        className="items-stretch"
+                        src={Product}
+                        width={500}
+                        height={400}
+                        alt=""
+                        />
+                <div className="flex flex-col w-1/4">
+                        <div className="h-2/3 items-center bg-[#434f55] rounded-xl display: block ">
+                            <h2 className="p-4 ">Description: </h2>
+                            <div className="p-4 whitespace-normal display: block ">{post?.description}</div>
+                        </div>
+                        <div className="flex flex-col">
+                            <p className="  text-4xl text-center p-4">{post?.price} $</p>
+                            <button className="btn btn-accent ">Buy</button>
+                        </div>
                 </div>
             </div>
         </main>

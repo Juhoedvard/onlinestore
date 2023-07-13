@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 "use client"
 
 import { useRouter } from "next/router"
@@ -11,10 +12,14 @@ export function Search()  {
     const router = useRouter()
 
     const handleSearch =  (event: React.FormEvent) => {
+        console.log(searchQuery)
         event.preventDefault()
         searchQuery.toLowerCase()
+        if(searchQuery == null){
+            router.replace("/")
 
-        // eslint-disable-next-line @typescript-eslint/no-floating-promises
+        }
+
         router.push(`/search/${searchQuery}`);
         setTimeout(() =>  {
             setSearchQyery("")

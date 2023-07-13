@@ -17,6 +17,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
       <Component {...pageProps} />
       <Footer/>
     </SessionProvider>
+
   );
 };
 

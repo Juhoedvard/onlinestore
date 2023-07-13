@@ -1,4 +1,4 @@
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession, signOut, signIn } from "next-auth/react";
 import Link from "next/link";
 import Image from "next/image";
 import {Search} from "./SearchBar"
@@ -19,10 +19,9 @@ export function NavBar()  {
           <div className="flex-none gap-2">
             {user == null ? (
               <div>
-                 <button
+                 <button onClick={() => void signIn()}
               className="rounded-full bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20"
-              onClick={() => void signIn()}
-           >Sign in</button>
+              >Sign in</button>
            </div>
             ) : (
               <div className="flex gap-2">
@@ -47,8 +46,10 @@ export function NavBar()  {
                       <a className="justify-between">
                           Profile
                       </a>
+                      <a className="justify-between">
+                          Cart
+                      </a>
                     </li>
-                    <li><a>Settings</a></li>
                     <li onClick={() => void signOut()}><a>Logout</a></li>
                   </ul>
                   </div>

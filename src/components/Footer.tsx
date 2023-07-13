@@ -4,8 +4,8 @@
 export function Footer() {
 
     return (
-        <footer className="footer p-10 text-neutral-content bg-base-300 bg-transparent z-20 top-0 bottom-0 absolut">
-        <div>
+        <footer className="footer p-10 text-neutral-content  bg-base-300  z-20 top-0 bottom-0 absolut ">
+        <div >
           <span className="footer-title">Services</span>
           <a className="link link-hover">Branding</a>
           <a className="link link-hover">Design</a>
@@ -26,5 +26,6 @@ export function Footer() {
           <a className="link link-hover">Cookie policy</a>
         </div>
       </footer>
+
     )
 }

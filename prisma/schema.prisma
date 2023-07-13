@@ -63,7 +63,6 @@ model Item {
     id            String    @id @default(cuid())
     product       String
     description   String?
-    gategory      Gategory[]
     price         Float
     image         String?
     creationDay   DateTime @default(now())
@@ -71,16 +70,4 @@ model Item {
     userID        String
 }
 
-model Gategory {
-    id          String @id @default(cuid())
-    item        Item[]
-    electronics String
-    clothes     String
-    sports      String
-    music       String
-    cooking     String
-
-
-
-}
 
