@@ -11,6 +11,30 @@ export const itemRouter = createTRPCRouter({
      return ctx.prisma.item.findMany();
 
   }),
+  getOne: publicProcedure
+  .input(z.object({id: z.string() }))
+  .query( async ({ctx, input}) => {
+    return ctx.prisma.item.findUnique({
+      where: {
+        id: input.id
+      }
+    })
+  }),
+
+
+  getSome: publicProcedure
+  .input(z.object({product: z.string() }))
+  .query(({ctx, input}) => {
+    return ctx.prisma.item.findMany({
+      where: {
+        product: {
+          startsWith: input.product,
+          mode: "insensitive"
+        }
+      }
+    })
+  }),
+
   create: protectedProcedure
   .input(
       z.object({

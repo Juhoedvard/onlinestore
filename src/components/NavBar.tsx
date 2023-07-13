@@ -1,6 +1,7 @@
 import { useSession, signIn, signOut } from "next-auth/react";
 import Link from "next/link";
 import Image from "next/image";
+import {Search} from "./SearchBar"
 
 export function NavBar()  {
 
@@ -8,13 +9,12 @@ export function NavBar()  {
     console.log(sessionData)
     const user = sessionData?.user
     console.log(user)
+
     return (
         <nav className="navbar bg-base-300 w-full z-20 top-0 sticky left-0 py-3">
           <div className="flex-1 gap-4 ">
               <Link href="/">Onlinestore</Link>
-              <div className="form-control align-self-center ">
-              <input type="text" placeholder="Search" className="input input-bordered w-24 md:w-auto" />
-          </div>
+              <Search/>
           </div>
           <div className="flex-none gap-2">
             {user == null ? (
@@ -44,10 +44,9 @@ export function NavBar()  {
                   </label>
                   <ul tabIndex={0} className="mt-3 p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52 ">
                     <li>
-                    <a className="justify-between">
-                        Profile
-                        <span className="badge">New</span>
-                    </a>
+                      <a className="justify-between">
+                          Profile
+                      </a>
                     </li>
                     <li><a>Settings</a></li>
                     <li onClick={() => void signOut()}><a>Logout</a></li>
