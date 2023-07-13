@@ -19,7 +19,7 @@ export default function Home() {
   }
   return (
     <>
-      <main className="flex min-h-screen flex-col gap-40 bg-gradient-to-b items-center justify-center bg-[#024b6d]">
+      <main className="flex min-h-screen flex-col gap-40 bg-gradient-to-b items-center justify-center bg-[#55656d] ">
         <div className="h-1 ">
         </div>
         <div className="grid container grid-cols-2 md:grid-cols-3 gap-20 items-center justify-center -z-0 ">
@@ -42,28 +42,9 @@ export default function Home() {
             </div>
           )})}
         </div>
-        <footer className="footer p-10 text-neutral-content bg-base-300">
-          <div>
-            <span className="footer-title">Services</span>
-            <a className="link link-hover">Branding</a>
-            <a className="link link-hover">Design</a>
-            <a className="link link-hover">Marketing</a>
-            <a className="link link-hover">Advertisement</a>
-          </div>
-          <div>
-            <span className="footer-title">Company</span>
-            <a className="link link-hover">About us</a>
-            <a className="link link-hover">Contact</a>
-            <a className="link link-hover">Jobs</a>
-            <a className="link link-hover">Press kit</a>
-          </div>
-          <div>
-            <span className="footer-title">Legal</span>
-            <a className="link link-hover">Terms of use</a>
-            <a className="link link-hover">Privacy policy</a>
-            <a className="link link-hover">Cookie policy</a>
-          </div>
-        </footer>
+        <div className="h-1 ">
+
+        </div>
       </main>
     </>
   );

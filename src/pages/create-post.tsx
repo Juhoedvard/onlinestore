@@ -48,7 +48,7 @@ const CreatePost: NextPage = () =>{
     }
     return(
         // eslint-disable-next-line @typescript-eslint/no-misused-promises
-        <form onSubmit={handleSubmit(onSubmit)} className=" flex gap-4 justify-center items-center min-h-screen md:h-auto bg-gradient-to-b bg-[#024b6d] ">
+        <form onSubmit={handleSubmit(onSubmit)} className=" flex gap-4 justify-center items-center min-h-screen md:h-auto bg-gradient-to-b  bg-[#55656d] ">
           <div className="flex flex-col gap-4 items-center justify-center  ">
           <h2 className="align-middle text-xl bold ">Create a new post</h2>
             <label>Product name: </label>

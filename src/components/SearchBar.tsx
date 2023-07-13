@@ -16,7 +16,9 @@ export function Search()  {
 
         // eslint-disable-next-line @typescript-eslint/no-floating-promises
         router.push(`/search/${searchQuery}`);
-        setSearchQyery("")
+        setTimeout(() =>  {
+            setSearchQyery("")
+        }, 7000)
 
     }
     return (

@@ -34,9 +34,9 @@ const SearchPage: NextPage = () => {
             <br></br>
             {items?.map((item: Item) => {
                 return(
-                    <div key={item.id}>
+                    <div key={item.id} className="flex flex-col gap-10">
                         <h1 className="text-8xl">{item?.product}</h1>
-                        <div className="flex gap-5">
+                        <div className="flex">
                             <Image
                             src={Product}
                             width={400}
@@ -51,6 +51,7 @@ const SearchPage: NextPage = () => {
                      </div>
                     </div>
                     )})}
+                    <div className="h-1 m-10 "></div>
         </div>
     )
 }
