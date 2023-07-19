@@ -8,7 +8,9 @@ import {
 export const itemRouter = createTRPCRouter({
 
   getAll: publicProcedure.query(({ ctx }) => {
-     return ctx.prisma.item.findMany();
+     return ctx.prisma.item.findMany({
+      take: 50
+     });
 
   }),
   getOne: publicProcedure
@@ -18,6 +20,16 @@ export const itemRouter = createTRPCRouter({
       where: {
         id: input.id
       }
+    })
+  }),
+
+  getUserItems: protectedProcedure
+  .query( async ({ctx}) => {
+    return ctx.prisma.item.findMany({
+      where:{
+        userID: ctx.session?.user.id
+        },
+      orderBy: [{ creationDay: "desc"}]
     })
   }),
 

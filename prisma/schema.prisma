@@ -48,9 +48,17 @@ model User {
     email         String?   @unique
     emailVerified DateTime?
     image         String?
+
+    deliveryInfo  Boolean @default(false)
+    address       String?
+    city          String?
+    postcode      String?
+    postoffice    String?
     accounts      Account[]
     sessions      Session[]
+
 }
+
 
 model VerificationToken {
     identifier String
@@ -68,6 +76,8 @@ model Item {
     creationDay   DateTime @default(now())
     updatedAt     DateTime? @updatedAt
     userID        String
+
+
 }
 
 

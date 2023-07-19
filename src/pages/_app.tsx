@@ -5,18 +5,24 @@ import { api } from "~/utils/api";
 import "~/styles/globals.css";
 import { NavBar } from "~/components/NavBar";
 import { Footer } from "~/components/Footer";
+import { ToastContainer } from "react-toastify";
+
+
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
   pageProps: { session, ...pageProps },
 }) => {
   console.log(session)
+
   return (
     <SessionProvider session={session}>
       <NavBar/>
+      <ToastContainer position="top-right"/>
       <Component {...pageProps} />
       <Footer/>
     </SessionProvider>
+
 
   );
 };

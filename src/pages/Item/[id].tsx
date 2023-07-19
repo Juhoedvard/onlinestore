@@ -4,17 +4,21 @@ import { api } from "~/utils/api";
 import  Image  from "next/image";
 import Product from "../../../public/shoes.png";
 import Link from "next/link";
+import { Loading } from "~/components/LoadingProfile";
 
 
 const ItemDetails: NextPage =  () => {
 
     const router = useRouter()
-    const { data: post} = api.item.getOne.useQuery({
+    const { data: post, isLoading} = api.item.getOne.useQuery({
         id: router.query.id as string
     },
     {
         enabled: !!router.query.id,
     })
+
+    if( isLoading) return (<Loading/>)
+
     return (
         <main className="flex min-h-screen flex-col gap-10 bg-gradient-to-b items-center  text-white bg-[#55656d]">
             <nav className="flex w-4/5 z-20 top-0  left-0 py-3 ">

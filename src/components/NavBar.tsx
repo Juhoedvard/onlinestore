@@ -3,15 +3,13 @@ import Link from "next/link";
 import Image from "next/image";
 import {Search} from "./SearchBar"
 
-export function NavBar()  {
+export const NavBar = () =>  {
 
-    const { data : sessionData } = useSession();
-    console.log(sessionData)
-    const user = sessionData?.user
-    console.log(user)
+    const {  data: Session } = useSession();
+    const user = Session?.user
 
     return (
-        <nav className="navbar bg-base-300 w-full z-20 top-0 sticky left-0 py-3">
+        <nav className="navbar bg-base-300 w-full z-20 top-0 sticky left-0 py-3 text-white">
           <div className="flex-1 gap-4 ">
               <Link href="/">Onlinestore</Link>
               <Search/>
@@ -20,7 +18,7 @@ export function NavBar()  {
             {user == null ? (
               <div>
                  <button onClick={() => void signIn()}
-              className="rounded-full bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20"
+              className="rounded-full bg-white/10 px-10 py-3 font-semibold  no-underline transition hover:bg-white/20"
               >Sign in</button>
            </div>
             ) : (
@@ -43,9 +41,9 @@ export function NavBar()  {
                   </label>
                   <ul tabIndex={0} className="mt-3 p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52 ">
                     <li>
-                      <a className="justify-between">
+                      <Link href={`/profile`} className="justify-between">
                           Profile
-                      </a>
+                      </Link>
                       <a className="justify-between">
                           Cart
                       </a>
