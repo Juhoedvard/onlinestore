@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
-import { type NextPage } from "next";
+"useClient"
 import { api } from "~/utils/api";
 import { useSession } from "next-auth/react";
 import { useForm } from "react-hook-form";
@@ -16,7 +16,7 @@ type CreatePostForm = {
     image: string;
   }
 
-const CreatePost: NextPage = () =>{
+export default function CreatePost() {
 
 
     const router = useRouter();
@@ -73,4 +73,3 @@ const CreatePost: NextPage = () =>{
     )
   }
 
-export default CreatePost

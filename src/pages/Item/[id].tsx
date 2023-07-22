@@ -1,22 +1,43 @@
-import { type  NextPage } from "next";
+/* eslint-disable @typescript-eslint/no-floating-promises */
+
+"use client"
 import { useRouter } from "next/router";
 import { api } from "~/utils/api";
 import  Image  from "next/image";
 import Product from "../../../public/shoes.png";
 import Link from "next/link";
 import { Loading } from "~/components/LoadingProfile";
+import { toast } from "react-toastify";
+import { useSession } from "next-auth/react";
 
 
-const ItemDetails: NextPage =  () => {
+
+
+export default function ItemDetails () {
 
     const router = useRouter()
-    const { data: post, isLoading} = api.item.getOne.useQuery({
+    const {data: user} = useSession()
+    const {data: Item, isLoading} = api.item.getOne.useQuery({
         id: router.query.id as string
     },
     {
         enabled: !!router.query.id,
     })
 
+    const addToCart = api.item.addTocart.useMutation({
+        onSuccess: () => {
+            void  toast.success(`${Item!.product} added to the cart`)
+            router.push("/cart")
+        }
+    })
+    const add = (id: string) => {
+        addToCart.mutateAsync({
+            id: id,
+            buyerID: user?.user.id as string
+        }
+        )
+    }
+    if(Item == null) return null
     if( isLoading) return (<Loading/>)
 
     return (
@@ -28,7 +49,7 @@ const ItemDetails: NextPage =  () => {
             </nav>
             <br></br>
             <div className="place-self-auto w-2/3 ">
-                <h1 className="text-6xl m-4 border-b p-2 text-center place-self-start ">{post?.product}</h1>
+                <h1 className="text-6xl m-4 border-b p-2 text-center place-self-start ">{Item.product}</h1>
             </div>
             <div className="flex w-full h-full justify-center items-stretch gap-3">
                  <Image
@@ -41,11 +62,11 @@ const ItemDetails: NextPage =  () => {
                 <div className="flex flex-col w-1/4">
                         <div className="h-2/3 items-center bg-[#434f55] rounded-xl display: block ">
                             <h2 className="p-4 ">Description: </h2>
-                            <div className="p-4 whitespace-normal display: block ">{post?.description}</div>
+                            <div className="p-4 whitespace-normal display: block ">{Item.description}</div>
                         </div>
                         <div className="flex flex-col">
-                            <p className="  text-4xl text-center p-4">{post?.price} $</p>
-                            <button className="btn btn-accent ">Buy</button>
+                            <p className="  text-4xl text-center p-4">{Item.price} $</p>
+                            <button className="btn btn-accent " onClick={() => add(Item.id)}>Buy</button>
                         </div>
                 </div>
             </div>
@@ -56,4 +77,4 @@ const ItemDetails: NextPage =  () => {
 
 
 
-export default ItemDetails
+

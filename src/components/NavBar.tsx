@@ -1,7 +1,9 @@
+
 import { useSession, signOut, signIn } from "next-auth/react";
 import Link from "next/link";
 import Image from "next/image";
-import {Search} from "./SearchBar"
+import Search from "./SearchBar";
+
 
 export const NavBar = () =>  {
 
@@ -44,9 +46,9 @@ export const NavBar = () =>  {
                       <Link href={`/profile`} className="justify-between">
                           Profile
                       </Link>
-                      <a className="justify-between">
-                          Cart
-                      </a>
+                      <Link href="/cart"className="justify-between">
+                        Cart
+                      </Link>
                     </li>
                     <li onClick={() => void signOut()}><a>Logout</a></li>
                   </ul>

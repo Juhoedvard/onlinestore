@@ -6,6 +6,7 @@ import "~/styles/globals.css";
 import { NavBar } from "~/components/NavBar";
 import { Footer } from "~/components/Footer";
 import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -18,7 +19,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
   return (
     <SessionProvider session={session}>
       <NavBar/>
-      <ToastContainer position="top-right"/>
+      <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick={false}/>
       <Component {...pageProps} />
       <Footer/>
     </SessionProvider>

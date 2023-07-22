@@ -1,6 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
+"use client"
 
-import { type NextPage } from "next";
+
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { api } from "~/utils/api";
@@ -8,8 +9,8 @@ import Image from "next/image"
 import { type Item } from "@prisma/client";
 import Product from "../../../public/shoes.png";
 
-const SearchPage: NextPage = () => {
 
+export default function SearchPage ()  {
 
     const router = useRouter()
     console.log(router.query.search)
@@ -52,7 +53,7 @@ const SearchPage: NextPage = () => {
                            </div>
                            <div className="flex flex-col">
                                <p className="  text-4xl text-center p-4">{item?.price} $</p>
-                               <button className="btn btn-accent ">View</button>
+                               <Link href={`/Item/${item?.id}`} className="btn btn-accent ">View</Link>
                            </div>
                    </div>
                    <div></div>
@@ -62,6 +63,3 @@ const SearchPage: NextPage = () => {
         </div>
     )
 }
-
-
-export default SearchPage

@@ -48,7 +48,6 @@ model User {
     email         String?   @unique
     emailVerified DateTime?
     image         String?
-
     deliveryInfo  Boolean @default(false)
     address       String?
     city          String?
@@ -67,6 +66,7 @@ model VerificationToken {
 
     @@unique([identifier, token])
 }
+
 model Item {
     id            String    @id @default(cuid())
     product       String
@@ -76,7 +76,7 @@ model Item {
     creationDay   DateTime @default(now())
     updatedAt     DateTime? @updatedAt
     userID        String
-
+    buyerID       String?
 
 }
 

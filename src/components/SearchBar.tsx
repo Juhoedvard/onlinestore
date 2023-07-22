@@ -6,7 +6,7 @@ import { useState } from "react"
 
 
 
-export function Search()  {
+export default function Search()  {
 
     const [searchQuery, setSearchQyery] = useState("")
     const router = useRouter()

@@ -27,7 +27,7 @@ export const itemRouter = createTRPCRouter({
   .query( async ({ctx}) => {
     return ctx.prisma.item.findMany({
       where:{
-        userID: ctx.session?.user.id
+        userID: ctx.session.user.id
         },
       orderBy: [{ creationDay: "desc"}]
     })
@@ -69,5 +69,25 @@ export const itemRouter = createTRPCRouter({
       return post
   }),
 
+  addTocart: protectedProcedure
+  .input(
+      z.object({
+        id: z.string(),
+        buyerID: z.string(),
+      })
+  )
+  .mutation( async ({input, ctx}) => {
+      const addTocart = await ctx.prisma.item.update({
+          where: {
+              id: input.id
+          },
+          data: {
+              buyerID: input.buyerID
+          }
+        })
+        return addTocart
+      }),
 
-});
+
+
+})

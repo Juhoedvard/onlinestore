@@ -14,12 +14,12 @@ export const SideNav = () => {
         <div className=" flex min-h-screen text-white bg-[#3a454b] gap-20 sticky">
                 <nav className=" items-center bg-base-300 w-40">
                     <br></br>
-                    <div className="flex flex-col ">
-                        <Link href={`/profile/`} className="h-10  hover:bg-[#3a454b] rounded-lg w-full text-center py-6">Profile</Link>
-                        <Link href={`/profile/delivery-info`} className="h-10  hover:bg-[#3a454b] rounded-lg w-full text-center py-6">Delivery Info</Link>
-                        <Link href={`/profile/history`} className="h-10  hover:bg-[#3a454b] rounded-lg w-full text-center py-6">History</Link>
-                        <Link href={`/profile/${session?.user.id}/payment`} className="h-10  hover:bg-[#3a454b] rounded-lg w-full text-center py-6">Payment</Link>
-                    </div>
+                    <ul className="flex flex-col gap-6 ">
+                        <li className="h-10  hover:bg-[#3a454b] rounded-lg w-full text-center py-2"><Link href={`/profile/`} >Profile</Link></li>
+                        <li className="h-10  hover:bg-[#3a454b] rounded-lg w-full text-center py-2"><Link href={`/profile/delivery-info`} >Delivery Info</Link></li>
+                        <li className="h-10  hover:bg-[#3a454b] rounded-lg w-full text-center py-2"><Link href={`/profile/history`}>History</Link></li>
+                        <li className="h-10  hover:bg-[#3a454b] rounded-lg w-full text-center py-2"><Link href={`/profile/${session?.user.id}/payment`}>Payment</Link></li>
+                    </ul>
                 </nav>
         </div>
     )
