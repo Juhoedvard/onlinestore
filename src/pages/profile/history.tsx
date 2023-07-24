@@ -4,13 +4,12 @@ import { SideNav } from "~/components/SideNav";
 import { api } from "~/utils/api";
 import Image from "next/image"
 import Product from "../../../public/shoes.png";
+import Link from "next/link";
 
 
 const History:NextPage = () =>{
 
-
     const {data: items} = api.item.getUserItems.useQuery()
-    console.log(items)
 
     return (
         <div className="flex gap-10 text-white bg-[#3a454b] scroll-smooth">
@@ -29,7 +28,7 @@ const History:NextPage = () =>{
                                 <div className="flex-1 flex-col gap-5">
                                     <h2>Description: </h2>
                                     <span>{item.description}</span>
-                                    </div>
+                                </div>
                                 <figure>
                                     <Image
                                         src={Product}
@@ -37,7 +36,9 @@ const History:NextPage = () =>{
                                         height={200}
                                         alt=""/>
                                 </figure>
-                                <button>Edit</button>
+                                <div className="flex flex-col justify-center">
+                                    <Link href={`/Item/${item.id}/edit`}>Edit</Link>
+                                </div>
                             </div> )
                     })
                 }

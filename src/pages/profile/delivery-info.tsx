@@ -67,8 +67,9 @@ const DeliveryInfo:NextPage = () => {
                             <input {...register("postoffice", { required: true })} type="text" placeholder="Postoffice" className="input w-full max-w-xs"/>
                         </div>
                     </div>
-                    <div className="p-4 w-1/2">
-                        <button className="btn btn-accent" type="submit" >Save</button>
+                    <div className="flex p-4 w-1/2 gap-2">
+                        <button className="btn btn-accent w-1/5" type="submit">Save</button>
+                        <button onClick={() => setShow(true)} className="btn btn-accent w-1/5" type="button">Cancel</button>
                     </div>
                 </form>
             ) : (
@@ -81,23 +82,23 @@ const DeliveryInfo:NextPage = () => {
                         </div>
                     </div>
                     <div className="flex w-1/2 p-4 ">
-                        <div className="flex-1 flex-col gap-5 p-2  border-b">
+                        <div className="flex-1 flex-col gap-5 p-2 border-b">
                             <label>Home address: </label>
                             <p>{user?.address}</p>
                         </div>
                     </div>
                     <div className="flex w-1/2 p-4 gap-6 ">
-                        <div className="flex-1 flex-col gap-5 p-2  border-b">
+                        <div className="flex-1 flex-col gap-5 p-2 border-b">
                         <label>Postal code: </label>
                             <p>{user?.postcode}</p>
                         </div>
-                        <div className="flex-1 flex-col gap-5 p-2  border-b">
+                        <div className="flex-1 flex-col gap-5 p-2 border-b">
                         <label>Postal Office: </label>
                         <p>{user?.postoffice}</p>
                     </div>
                     </div>
                      <div className="flex w-1/2 p-4 gap-6">
-                         <button className="btn btn-neutral" onClick={() => setShow(false)}>Edit</button>
+                         <button onClick={() => setShow(false)} className="btn btn-neutral">Edit</button>
                      </div>
                 </div>)}
         </div>

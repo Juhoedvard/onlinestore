@@ -70,7 +70,7 @@ model VerificationToken {
 model Item {
     id            String    @id @default(cuid())
     product       String
-    description   String?
+    description   String
     price         Float
     image         String?
     creationDay   DateTime @default(now())

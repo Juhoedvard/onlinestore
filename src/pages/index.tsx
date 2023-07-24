@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-misused-promises */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
+
 import { api } from "~/utils/api";
 import { type Item } from "@prisma/client";
 import Image from "next/image";
@@ -19,7 +17,7 @@ const Home: NextPage = () => {
 
   return (
     <>
-      <main className="flex min-h-screen flex-col gap-40 bg-gradient-to-b items-center justify-center bg-[#55656d] scroll-smooth">
+      <main className="flex min-h-screen flex-col gap-40 bg-gradient-to-b items-center justify-center bg-[#55656d] scroll-smooth text-white">
         <div className="h-0.5 ">
         </div>
         <div className="grid container grid-cols-2 md:grid-cols-2 gap-20 items-center-z-0 ">
@@ -44,8 +42,7 @@ const Home: NextPage = () => {
               </div>
           )})}
         </div>
-        <div className="h-1 ">
-        </div>
+        <br></br>
       </main>
 
     </>

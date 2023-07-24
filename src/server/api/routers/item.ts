@@ -88,6 +88,56 @@ export const itemRouter = createTRPCRouter({
         return addTocart
       }),
 
+    getCart: protectedProcedure
+      .query( async ({ctx}) => {
+        return await ctx.prisma.item.findMany({
+          where: {
+            buyerID: ctx.session.user.id
+          }
+        })
+
+      }),
+
+    deleteFromCart: protectedProcedure
+      .input(
+        z.object({
+          id: z.string()
+        })
+      )
+      .mutation( async ({input, ctx}) => {
+        return await ctx.prisma.item.update({
+          where: {
+            id: input.id
+          },
+          data: {
+            buyerID: null
+          }
+        })
+      }),
+
+    updatePost: protectedProcedure
+      .input(
+        z.object({
+          id: z.string(),
+          product: z.string().min(3, {message: 'Product name must be longer than 3 charecters'}).max(20, {}),
+          price: z.number(),
+          description: z.string().min(3, {message: 'Description needs to be more than 3 charecters long'}),
+        })
+      )
+      .mutation( async ({input, ctx}) => {
+        return await ctx.prisma.item.update({
+          where: {
+            id: input.id
+          },
+          data: {
+            ...input
+          }
+        })
+      }
+      )
+
+
+
 
 
 })

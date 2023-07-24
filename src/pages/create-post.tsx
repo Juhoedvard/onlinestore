@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-floating-promises */
 "useClient"
 import { api } from "~/utils/api";
@@ -5,8 +6,7 @@ import { useSession } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import { useState } from "react";
-
-
+import { toast } from "react-toastify";
 
 
 type CreatePostForm = {
@@ -18,16 +18,26 @@ type CreatePostForm = {
 
 export default function CreatePost() {
 
-
     const router = useRouter();
     const ctx = api.useContext();
     const post = api.item.create.useMutation({
       onSuccess: () => {
         void ctx.item.getAll.invalidate()
-        .then(() => {
-          router.push("/");
-          setImage('')
-        })
+        toast.success("New post created")
+        router.push("/");
+      },
+      onError: (e) => {
+        const error = e.data?.zodError?.fieldErrors;
+        console.log(error)
+        if (error) {
+          Object.entries(error).forEach(([key, value]) => {
+            toast.error(`${key}: ${value}`);
+          });
+        }
+        else{
+          toast.error("Something went wrong")
+        }
+
       }
     });
     const [image, setImage] = useState<string>('');
@@ -37,6 +47,7 @@ export default function CreatePost() {
     });
 
     const onSubmit =  (formData: CreatePostForm) => {
+      console.log("clicked")
       console.log(formData.image, "formdata")
       // eslint-disable-next-line @typescript-eslint/no-floating-promises
       post.mutateAsync({
@@ -64,7 +75,7 @@ export default function CreatePost() {
             <label>Price: </label>
             <input {...register("price", { required: true })} type="number"   step="0,01" placeholder="Type here" className="input input-bordered w-full max-w-xs" />
             <label>Description: </label>
-            <textarea {...register("description", { required: true, })}  placeholder="Type here" className="input input-bordered w-full max-w-xs"/>
+            <textarea {...register("description", { required: false, })}  placeholder="Type here" className="input input-bordered w-full max-w-xs"/>
             <label>Image: </label>
             <input  onChange={(e) => handleImage(e)} type="file" className="input input-bordered w-full max-w-xs"/>
             <button className="btn btn-sm btn-success" type="submit">Create</button>
