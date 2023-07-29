@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
-import { useSession } from "next-auth/react"
+
 import Link from "next/link"
 
 
@@ -7,7 +7,6 @@ import Link from "next/link"
 
 export const SideNav = () => {
 
-    const { data: session } = useSession()
 
 
     return(
@@ -18,7 +17,6 @@ export const SideNav = () => {
                         <li className="h-10  hover:bg-[#3a454b] rounded-lg w-full text-center py-2"><Link href={`/profile/`} >Profile</Link></li>
                         <li className="h-10  hover:bg-[#3a454b] rounded-lg w-full text-center py-2"><Link href={`/profile/delivery-info`} >Delivery Info</Link></li>
                         <li className="h-10  hover:bg-[#3a454b] rounded-lg w-full text-center py-2"><Link href={`/profile/history`}>History</Link></li>
-                        <li className="h-10  hover:bg-[#3a454b] rounded-lg w-full text-center py-2"><Link href={`/profile/${session?.user.id}/payment`}>Payment</Link></li>
                     </ul>
                 </nav>
         </div>

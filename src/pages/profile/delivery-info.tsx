@@ -20,7 +20,17 @@ type DeliveryForm = {
 const DeliveryInfo:NextPage = () => {
 
 
-    const {  data: Session } = useSession();
+    const {  data: Session } = useSession({
+        required: true,
+        onUnauthenticated() {
+            return {
+                redirect: {
+                    destination: "/api/auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2Fprofile%2Fdelivery-info",
+                    permanent: true,
+                },
+            };
+        },
+    });
     const ctx = api.useContext();
     const info = api.user.setDelivery.useMutation({
         onSuccess: () => {
@@ -46,7 +56,6 @@ const DeliveryInfo:NextPage = () => {
         <div className="flex gap-10 text-white bg-[#3a454b]">
             <SideNav/>
             {show === false ? (
-
                 <form onSubmit={handleSubmit(onSubmit)}className="flex flex-col gap-10 w-2/3">
                     <h2 className="text-3xl py-4">Delivery info</h2>
                     <div className="flex w-1/2 p-4 ">
@@ -68,8 +77,8 @@ const DeliveryInfo:NextPage = () => {
                         </div>
                     </div>
                     <div className="flex p-4 w-1/2 gap-2">
-                        <button className="btn btn-accent w-1/5" type="submit">Save</button>
                         <button onClick={() => setShow(true)} className="btn btn-accent w-1/5" type="button">Cancel</button>
+                        <button className="btn btn-accent w-1/5" type="submit">Save</button>
                     </div>
                 </form>
             ) : (

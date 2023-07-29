@@ -53,7 +53,7 @@ export const itemRouter = createTRPCRouter({
         product: z.string().min(3, {message: 'Product name must be longer than 3 charecters'}).max(20, {}),
         price: z.number(),
         description: z.string().min(3, {message: 'Description needs to be more than 3 charecters long'}),
-        image: string()
+        image: string().nullish().catch( undefined)
       })
   )
   .mutation( async ({input, ctx }) => {
@@ -122,6 +122,7 @@ export const itemRouter = createTRPCRouter({
           product: z.string().min(3, {message: 'Product name must be longer than 3 charecters'}).max(20, {}),
           price: z.number(),
           description: z.string().min(3, {message: 'Description needs to be more than 3 charecters long'}),
+          image: string().nullish().catch( undefined)
         })
       )
       .mutation( async ({input, ctx}) => {

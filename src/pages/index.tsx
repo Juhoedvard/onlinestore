@@ -2,11 +2,10 @@
 import { api } from "~/utils/api";
 import { type Item } from "@prisma/client";
 import Image from "next/image";
-import Product from "../../public/shoes.png";
 import Link from "next/link";
 import { Loading } from "~/components/LoadingProfile";
 import type { NextPage } from "next";
-
+import noImage from "../../public/noImage.jpg"
 
 
 const Home: NextPage = () => {
@@ -27,12 +26,19 @@ const Home: NextPage = () => {
                 <div className="flex flex-col items-center justify-center">
                   <h2 className="card-title m-4 justify-center" >{item.product}</h2>
                    <figure className="h-1/2 m-4">
+                    {item.image ?
                       <Image
-                          src={Product}
+                          loader={() => item.image || ''}
+                          src={item.image || noImage}
                           width={300}
                           height={300}
                           alt=""
-                      />
+                      /> :
+                      <Image
+                          src={noImage}
+                          width={300}
+                          height={300}
+                          alt=""/>}
                    </figure>
                    <div className="flex flex-col justify-center gap-2">
                       <p className="m-3 text-center">{item.price} $</p>

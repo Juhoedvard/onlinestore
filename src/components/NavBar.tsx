@@ -1,14 +1,18 @@
+"use client"
 
 import { useSession, signOut, signIn } from "next-auth/react";
 import Link from "next/link";
 import Image from "next/image";
 import Search from "./SearchBar";
+import { useRouter } from "next/router";
 
 
 export const NavBar = () =>  {
 
     const {  data: Session } = useSession();
     const user = Session?.user
+    const router = useRouter()
+    console.log(router.pathname)
 
     return (
         <nav className="navbar bg-base-300 w-full z-20 top-0 sticky left-0 py-3 text-white">
@@ -41,16 +45,19 @@ export const NavBar = () =>  {
                         />
                     </div>}
                   </label>
-                  <ul tabIndex={0} className="mt-3 p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52 ">
+                  <ul tabIndex={0} className="mt-3 p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"  >
                     <li>
+
                       <Link href={`/profile`} className="justify-between">
                           Profile
                       </Link>
+                    </li>
+                    <li>
                       <Link href="/cart"className="justify-between">
                         Cart
                       </Link>
                     </li>
-                    <li onClick={() => void signOut()}><a>Logout</a></li>
+                    <li onClick={() => void signOut({ callbackUrl: `/` })}><a>Logout</a></li>
                   </ul>
                   </div>
               </div>)}

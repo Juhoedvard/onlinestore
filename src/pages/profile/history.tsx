@@ -3,9 +3,8 @@ import type { NextPage } from "next";
 import { SideNav } from "~/components/SideNav";
 import { api } from "~/utils/api";
 import Image from "next/image"
-import Product from "../../../public/shoes.png";
 import Link from "next/link";
-
+import noImage from "../../../public/noImage.jpg"
 
 const History:NextPage = () =>{
 
@@ -30,11 +29,19 @@ const History:NextPage = () =>{
                                     <span>{item.description}</span>
                                 </div>
                                 <figure>
+                                {item.image ?
                                     <Image
-                                        src={Product}
+                                        loader={() => item.image || ''}
+                                        src={item.image || noImage}
                                         width={200}
                                         height={200}
-                                        alt=""/>
+                                        alt=""
+                                    /> :
+                                    <Image
+                                        src={noImage}
+                                        width={150}
+                                        height={100}
+                                        alt=""/>}
                                 </figure>
                                 <div className="flex flex-col justify-center">
                                     <Link href={`/Item/${item.id}/edit`}>Edit</Link>

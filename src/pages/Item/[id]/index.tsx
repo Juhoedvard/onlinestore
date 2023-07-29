@@ -5,12 +5,11 @@
 import { useRouter } from "next/router";
 import { api } from "~/utils/api";
 import  Image  from "next/image";
-import Product from "../../../../public/shoes.png";
 import Link from "next/link";
 import { Loading } from "~/components/LoadingProfile";
 import { toast } from "react-toastify";
 import { useSession } from "next-auth/react";
-
+import noImage from "../../../../public/noImage.jpg"
 
 
 export default function ItemDetails () {
@@ -32,9 +31,8 @@ export default function ItemDetails () {
         },
         onError: () => {
             toast.error("Something went wrong")
-        }
+        },
     })
-
 
     const add = (id: string) => {
 
@@ -51,11 +49,8 @@ export default function ItemDetails () {
             buyerID: user?.user.id as string
         })
     }
-
-
     if(Item == null) return( <div>Something went wrong</div>)
     if( isLoading) return (<Loading/>)
-
 
     return (
         <main className="flex min-h-screen flex-col gap-10 bg-gradient-to-b items-center  text-white bg-[#55656d]">
@@ -70,13 +65,19 @@ export default function ItemDetails () {
                 <h1 className="text-6xl m-4 border-b p-2 text-center place-self-start ">{Item.product}</h1>
             </div>
             <div className="flex w-full h-full justify-center items-stretch gap-3">
-                 <Image
-                        className="items-stretch"
-                        src={Product}
-                        width={500}
-                        height={400}
-                        alt=""
-                        />
+          {Item.image ?
+                      <Image
+                          loader={() => Item.image || ''}
+                          src={Item.image}
+                          width={300}
+                          height={300}
+                          alt=""
+                      /> :
+                      <Image
+                          src={noImage}
+                          width={300}
+                          height={300}
+                          alt=""/>}
                 <div className="flex flex-col w-1/4">
                         <div className="h-2/3 items-center bg-[#434f55] rounded-xl display: block ">
                             <h2 className="p-4 ">Description: </h2>
@@ -84,7 +85,7 @@ export default function ItemDetails () {
                         </div>
                         <div className="flex flex-col">
                             <p className="  text-4xl text-center p-4">{Item.price} $</p>
-                            <button className="btn btn-accent " onClick={() => add(Item.id)}>Buy</button>
+                            <button className="btn btn-accent " onClick={() => add(Item.id)} disabled={addToCart.isLoading || !user}>Add to cart</button>
                         </div>
                 </div>
             </div>
