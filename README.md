@@ -1,28 +1,30 @@
-# Create T3 App
+# Onlinestore 
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+## Description:
 
-## What's next? How do I make an app with this?
+I made this project to learn typescript, NextJS and overall learn more about web development. Project is simple online marketplace where customer can sell items.
+Project is still in progress so there might be some bugs or some features doesn't work.
+I used T3-stack to setup the project and following other frameworks: 
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
-
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
-
+- [T3-stack](https://create.t3.gg/)
 - [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+- [NextAuth.js](https://next-auth.js.org) for authentication(google)
+- [Prisma](https://prisma.io) for managing and interact with database
+- [Tailwind CSS](https://tailwindcss.com) 
+- [tRPC](https://trpc.io) for client and server communication
+- [DaisyUi](https://daisyui.com/docs/install/) for components
+- [zod](https://zod.dev/?id=table-of-contents) for validating
+- [UpdateThing](https://uploadthing.com/) for imageuploading
+- [Supabase](https://supabase.com/) for database
 
-## Learn More
+  Project is being deployed in https://onlinestore-steel.vercel.app/
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+## How to install
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
-
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
-
-## How do I deploy this?
-
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+1. Clone project:  git clone https://github.com/Juhoedvard/onlinestore.git
+2. cd onlinestore
+3. npm i
+4. Set environment variables:
+   -Create .env file. You can copy .env.example file to .env which includes all the required enviroment variables and introduction how to get them.
+   -Run command npx prisma db push
+6. Run command npm run dev and onlinestore will run locally.
