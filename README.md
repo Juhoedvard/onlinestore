@@ -26,5 +26,5 @@ I used T3-stack to setup the project and following other frameworks:
 3. npm i
 4. Set environment variables:
    -Create .env file. You can copy .env.example file to .env which includes all the required enviroment variables and introduction how to get them.
-   -Run command npx prisma db push
+5. Run command npx prisma db push
 6. Run command npm run dev and onlinestore will run locally.
