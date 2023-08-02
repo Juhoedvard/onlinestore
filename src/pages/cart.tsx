@@ -22,7 +22,6 @@ const Cart:NextPage = () => {
     async function checkout() {
         const response = await createCheckout.mutateAsync();
         const stripe = await stripePromise
-
         if(stripe !== null){
             await stripe.redirectToCheckout({
                 sessionId: response.id,

@@ -17,17 +17,18 @@ export const paymentRouter = createTRPCRouter({
 
     createCheckout: protectedProcedure
         .mutation(() => {
+            console.log(env.NEXTAUTH_URL)
             return stripe.checkout.sessions.create({
                 mode: "payment",
                 payment_method_types: ["card"],
                 line_items: [
                     {
-                        price: process.env.STRIPE_PRICE_ID!,
+                        price: env.STRIPE_PRICE_ID,
                         quantity: 1,
                     },
                 ],
-                success_url: `http://localhost:3000/cart`,
-                cancel_url: `http://localhost:3000/cart`,
+                success_url: `${env.NEXTAUTH_URL}/`,
+                cancel_url: `${env.NEXTAUTH_URL}/cart`,
         })
     }),
     getStripeSession: protectedProcedure
