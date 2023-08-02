@@ -16,7 +16,15 @@ import getStripe from "~/utils/get-stripe";
 const Cart:NextPage = () => {
 
     const ctx = api.useContext()
-    const createCheckout = api.payment.createCheckout.useMutation()
+    const createCheckout = api.payment.createCheckout.useMutation({
+        onSuccess: () => {
+            toast.success("Checkout created")
+        },
+        onError: () => {
+            toast.error("Not working yet")
+        }
+
+    })
     const stripePromise = getStripe()
 
     async function checkout() {
