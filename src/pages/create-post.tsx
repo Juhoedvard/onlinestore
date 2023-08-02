@@ -40,7 +40,7 @@ export default function CreatePost() {
       },
       onError: (e) => {
         const error = e.data?.zodError?.fieldErrors;
-        console.log(error)
+        (error)
         if (error) {
           Object.entries(error).forEach(([key, value]) => {
             toast.error(`${key}: ${value}`);
@@ -59,8 +59,8 @@ export default function CreatePost() {
     });
 
     const onSubmit =  (formData: CreatePostForm) => {
-      console.log("clicked")
-      console.log(formData.image, "formdata")
+      ("clicked")
+      (formData.image, "formdata")
       mutate({
         ...formData,
         price: parseFloat(formData.price),
@@ -90,7 +90,7 @@ export default function CreatePost() {
               if(res){
                 setImage(res)
               // Do something with the response
-              console.log("Files: ", res);
+              ("Files: ", res);
               toast.success("Upload Completed");}
               }}
               onUploadError={(error: Error) => {

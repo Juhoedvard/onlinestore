@@ -17,7 +17,7 @@ export const paymentRouter = createTRPCRouter({
 
     createCheckout: protectedProcedure
         .mutation(() => {
-            console.log(env.NEXTAUTH_URL)
+            (env.NEXTAUTH_URL)
             return stripe.checkout.sessions.create({
                 mode: "payment",
                 payment_method_types: ["card"],

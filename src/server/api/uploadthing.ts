@@ -15,9 +15,9 @@ export const ourFileRouter = {
 
     .onUploadComplete(async ({  file }) => {
       // This code RUNS ON YOUR SERVER after upload
-      console.log("Upload complete for userId:");
+      ("Upload complete for userId:");
 
-      console.log("file url", file.url);
+      ("file url", file.url);
     }),
 
 

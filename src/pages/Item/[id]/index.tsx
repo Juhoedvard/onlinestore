@@ -44,8 +44,8 @@ export default function ItemDetails () {
         })
 
     }
-    if(Item == null) return( <div>Something went wrong</div>)
     if( isLoading) return (<Loading/>)
+    if(Item == null) return( <div>Something went wrong</div>)
 
     return (
         <main className="flex min-h-screen flex-col gap-10 bg-gradient-to-b items-center  text-white bg-[#55656d]">

@@ -16,7 +16,7 @@ const History:NextPage = () =>{
             <div className="flex flex-col gap-10 w-2/3 justify-center items-center ">
                 <h1 className="text-2xl py-5">Your items</h1>
                     {items?.map((item: Item) => {
-                        console.log(item.creationDay)
+                        (item.creationDay)
                         return(
                             <div key={item.id}  className="flex flex-row w-full rounded-lg bg-base-100 shadow-xl justify-self-center p-4 translate-y-3 gap-10 justify-between px-10">
                                <div className="flex-1 flex-col gap-10 justify-between" >

@@ -36,7 +36,7 @@ const EditItem: NextPage = () => {
     const {data: Item, isLoading} = api.item.getOne.useQuery({
         id: router.query.id as string
     })
-    console.log(Item)
+    (Item)
     const {mutate, isLoading : loadingItem} = api.item.updatePost.useMutation({
         onSuccess: () => {
             void ctx.item.getOne.invalidate();
@@ -74,7 +74,7 @@ const EditItem: NextPage = () => {
                     if(res){
                         setImage(res)
                     // Do something with the response
-                        console.log("Files: ", res);
+                        ("Files: ", res);
                         toast.success("Upload Completed");}
                     }}
                     onUploadError={(error: Error) => {

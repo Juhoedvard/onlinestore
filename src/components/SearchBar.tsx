@@ -12,7 +12,7 @@ export default function Search()  {
     const router = useRouter()
 
     const handleSearch =  (event: React.FormEvent) => {
-        console.log(searchQuery)
+        (searchQuery)
         event.preventDefault()
         searchQuery.toLowerCase()
         if(searchQuery == null){

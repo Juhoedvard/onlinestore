@@ -36,7 +36,7 @@ const DeliveryInfo:NextPage = () => {
         onSuccess: () => {
          void  ctx.user.getAll.invalidate()}
     })
-    console.log(Session?.user.id)
+    (Session?.user.id)
     const {data: user, isLoading } = api.user.getUser.useQuery()
     const [show, setShow] = useState(user?.deliveryInfo)
     const {register, handleSubmit} = useForm<DeliveryForm>();
@@ -51,7 +51,7 @@ const DeliveryInfo:NextPage = () => {
 
 
     if(isLoading) return(<Loading/>)
-    console.log(user)
+    (user)
     return(
         <div className="flex gap-10 text-white bg-[#3a454b]">
             <SideNav/>

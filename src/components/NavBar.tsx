@@ -10,7 +10,7 @@ export const NavBar = () =>  {
 
     const {  data: Session } = useSession();
     const user = Session?.user
-    console.log(user)
+    (user)
 
     return (
         <nav className="navbar bg-base-300 w-full z-20 top-0 sticky left-0 py-3 text-white">
