@@ -11,7 +11,6 @@ import noImage from "../../public/noImage.jpg"
 const Home: NextPage = () => {
 
   const {data : allItems, isLoading} = api.item.getAll.useQuery();
-
   if (isLoading) return <Loading/>
 
   return (

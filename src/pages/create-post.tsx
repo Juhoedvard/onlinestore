@@ -15,7 +15,7 @@ import Link from "next/link";
 import { UploadDropzone } from "@uploadthing/react";
 import type { OurFileRouter } from "~/server/api/uploadthing";
 import "@uploadthing/react/styles.css";
-
+import Image from "next/image";
 
 type CreatePostForm = {
     product: string;
@@ -32,7 +32,6 @@ export default function CreatePost() {
       fileUrl: string;
       fileKey: string;
     }[]>([]);
-    console.log(image)
     const {mutate, isLoading} = api.item.create.useMutation({
       onSuccess: () => {
         void ctx.item.getAll.invalidate()
@@ -85,7 +84,7 @@ export default function CreatePost() {
             <label>Description: </label>
             <textarea {...register("description", { required: false, })}  placeholder="Type here" className="input input-bordered w-full max-w-xs"/>
             <label>Image: </label>
-            <UploadDropzone<OurFileRouter>
+            {!image[0]?.fileUrl ?<UploadDropzone<OurFileRouter>
               endpoint="strictImageAttachment"
               onClientUploadComplete={(res) => {
               if(res){
@@ -98,7 +97,13 @@ export default function CreatePost() {
               // Do something with the error.
               toast.error(`ERROR! ${error.message}`);
               }}
-            />
+            /> : <Image
+            loader={() => image[0]!.fileUrl}
+            src={image[0]!.fileUrl}
+            width={300}
+            height={300}
+            alt=""
+        />}
             <div className="flex gap-2">
               <Link href="/" className="btn btn-sm neutral"> Cancel</Link>
               <button className="btn btn-sm btn-success" type="submit" disabled={isLoading}>Create</button>

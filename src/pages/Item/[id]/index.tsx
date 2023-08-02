@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-misused-promises */
-/* eslint-disable @typescript-eslint/no-floating-promises */
+
 "use client"
 
 import { useRouter } from "next/router";
@@ -14,8 +13,8 @@ import noImage from "../../../../public/noImage.jpg"
 
 export default function ItemDetails () {
 
-    const router = useRouter()
     const ctx = api.useContext()
+    const router = useRouter()
     const {data: user} = useSession()
     const {data: Item, isLoading} = api.item.getOne.useQuery({
         id: router.query.id as string
@@ -23,31 +22,27 @@ export default function ItemDetails () {
     {
         enabled: !!router.query.id,
     })
-
-    const addToCart = api.item.addTocart.useMutation({
+    const {data: cart} = api.cart.getCart.useQuery()
+    const {mutate, isLoading: isMutating} = api.cart.addToCart.useMutation({
         onSuccess: () => {
-            void ctx.item.getOne.invalidate()
-            toast.success(`${Item!.product} added to the cart`)
-        },
-        onError: () => {
-            toast.error("Something went wrong")
-        },
+            void ctx.cart.getCart.invalidate()
+            toast('Item added to cart')
+        }
     })
+    const add =(id: string) => {
 
-    const add = (id: string) => {
-
-        if(Item?.buyerID){
-            toast.error("Item is already on cart")
-            return
+        if(cart?.userID === Item?.userID){
+            toast.info('You can not add your own item to cart')
+            return;
         }
-        if(Item?.userID === user?.user.id){
-            toast.error("You can't buy your own item")
-            return
+        else if(cart?.id === Item?.cartId){
+            toast.info('Item already in cart')
+            return;
         }
-        addToCart.mutateAsync({
+        mutate({
             id: id,
-            buyerID: user?.user.id as string
         })
+
     }
     if(Item == null) return( <div>Something went wrong</div>)
     if( isLoading) return (<Loading/>)
@@ -85,13 +80,15 @@ export default function ItemDetails () {
                         </div>
                         <div className="flex flex-col">
                             <p className="  text-4xl text-center p-4">{Item.price} $</p>
-                            <button className="btn btn-accent " onClick={() => add(Item.id)} disabled={addToCart.isLoading || !user}>Add to cart</button>
+                            <button className="btn btn-accent " onClick={() => add(Item.id)} disabled={isMutating} >Add to cart</button>
                         </div>
                 </div>
             </div>
             {Item.userID === user?.user.id &&
-            <div className="flex justify-end items-end w-1/2">
-              <Link href={`/Item/${Item.id}/edit`}className="btn btn-neutral">Edit post</Link>
+            <div className="flex justify-end items-end w-1/2 gap-2 px-16">
+                <button className="btn btn-danger w-40" onClick={() => toast('coming soon')}>Remove post</button>
+                <Link href={`/Item/${Item.id}/edit`}className="btn btn-neutral w-40">Edit post</Link>
+
             </div>} </>
             <br></br>
         </main>

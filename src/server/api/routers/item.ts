@@ -69,52 +69,6 @@ export const itemRouter = createTRPCRouter({
       return post
   }),
 
-  addTocart: protectedProcedure
-  .input(
-      z.object({
-        id: z.string(),
-        buyerID: z.string(),
-      })
-  )
-  .mutation( async ({input, ctx}) => {
-      const addTocart = await ctx.prisma.item.update({
-          where: {
-              id: input.id
-          },
-          data: {
-              buyerID: input.buyerID
-          }
-        })
-        return addTocart
-      }),
-
-    getCart: protectedProcedure
-      .query( async ({ctx}) => {
-        return await ctx.prisma.item.findMany({
-          where: {
-            buyerID: ctx.session.user.id
-          }
-        })
-
-      }),
-
-    deleteFromCart: protectedProcedure
-      .input(
-        z.object({
-          id: z.string()
-        })
-      )
-      .mutation( async ({input, ctx}) => {
-        return await ctx.prisma.item.update({
-          where: {
-            id: input.id
-          },
-          data: {
-            buyerID: null
-          }
-        })
-      }),
-
     updatePost: protectedProcedure
       .input(
         z.object({
@@ -134,8 +88,36 @@ export const itemRouter = createTRPCRouter({
             ...input
           }
         })
-      }
+      }),
+    deletePost: protectedProcedure
+      .input(
+        z.object({
+          id: z.string()
+        })
       )
+      .mutation( async ({input, ctx}) => {
+        return await ctx.prisma.item.delete({
+          where: {
+            id: input.id
+          }
+        })
+      }),
+
+      getCartItems: protectedProcedure
+        .input(
+          z.object({
+            cartId: z.string()
+          })
+        )
+        .query( async ({input, ctx}) => {
+          return ctx.prisma.item.findMany({
+            where: {
+              cartId:input.cartId
+            },
+            orderBy: [{ creationDay: "desc"}]
+          })
+        }),
+
 
 
 

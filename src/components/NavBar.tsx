@@ -4,15 +4,13 @@ import { useSession, signOut, signIn } from "next-auth/react";
 import Link from "next/link";
 import Image from "next/image";
 import Search from "./SearchBar";
-import { useRouter } from "next/router";
 
 
 export const NavBar = () =>  {
 
     const {  data: Session } = useSession();
     const user = Session?.user
-    const router = useRouter()
-    console.log(router.pathname)
+    console.log(user)
 
     return (
         <nav className="navbar bg-base-300 w-full z-20 top-0 sticky left-0 py-3 text-white">
