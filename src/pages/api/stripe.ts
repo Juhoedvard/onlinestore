@@ -39,13 +39,12 @@ const webhookHandler = async (req: NextApiRequest, res: NextApiResponse) => {
       const errorMessage = err instanceof Error ? err.message : 'Unknown error'
       // On error, log and return the error message.
       if (err instanceof Error) (err)
-      (`❌ Error message: ${errorMessage}`)
       res.status(400).send(`Webhook Error: ${errorMessage}`)
       return
     }
 
     // Successfully constructed event.
-    ('✅ Success:', event.id)
+
 
     // Cast event data to Stripe object.
     switch (event.type) {
