@@ -26,7 +26,7 @@ export const paymentRouter = createTRPCRouter({
                         quantity: 1,
                     },
                 ],
-                success_url: `${env.NEXTAUTH_URL}/`,
+                success_url: `${env.NEXTAUTH_URL}`,
                 cancel_url: `${env.NEXTAUTH_URL}/cart`,
         })
     }),
