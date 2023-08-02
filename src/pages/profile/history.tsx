@@ -55,6 +55,4 @@ const History:NextPage = () =>{
     )
 }
 
-
-
 export default History

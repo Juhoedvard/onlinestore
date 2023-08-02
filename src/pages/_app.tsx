@@ -14,7 +14,6 @@ const MyApp: AppType<{ session: Session | null }> = ({
   Component,
   pageProps: { session, ...pageProps },
 }) => {
-  (session)
 
   return (
     <SessionProvider session={session}>

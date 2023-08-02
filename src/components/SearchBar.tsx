@@ -17,7 +17,6 @@ export default function Search()  {
         searchQuery.toLowerCase()
         if(searchQuery == null){
             router.replace("/")
-
         }
 
         router.push(`/search/${searchQuery}`);

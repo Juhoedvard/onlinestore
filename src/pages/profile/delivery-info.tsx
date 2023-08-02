@@ -34,9 +34,10 @@ const DeliveryInfo:NextPage = () => {
     const ctx = api.useContext();
     const info = api.user.setDelivery.useMutation({
         onSuccess: () => {
-         void  ctx.user.getAll.invalidate()}
+          void ctx.user.getAll.invalidate()
+        }
     })
-    (Session?.user.id)
+
     const {data: user, isLoading } = api.user.getUser.useQuery()
     const [show, setShow] = useState(user?.deliveryInfo)
     const {register, handleSubmit} = useForm<DeliveryForm>();
@@ -51,7 +52,6 @@ const DeliveryInfo:NextPage = () => {
 
 
     if(isLoading) return(<Loading/>)
-    (user)
     return(
         <div className="flex gap-10 text-white bg-[#3a454b]">
             <SideNav/>

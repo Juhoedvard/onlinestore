@@ -11,15 +11,13 @@ import noImage from "../../../public/noImage.jpg"
 export default function SearchPage ()  {
 
     const router = useRouter()
-    (router.query.search)
     const { data: items} = api.item.getSome.useQuery({
         product: router.query.search as string
     },
     {
         enabled: !!router.query.search,
     })
-    (router.query.search)
-    (items)
+
 
     if(items?.length === 0 ){
         return <div>No results, try a different </div>

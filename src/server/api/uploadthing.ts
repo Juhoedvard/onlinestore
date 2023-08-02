@@ -13,11 +13,9 @@ export const ourFileRouter = {
 
   strictImageAttachment: f({ image: { maxFileSize: "2MB", maxFileCount: 1 } })
 
-    .onUploadComplete(async ({  file }) => {
-      // This code RUNS ON YOUR SERVER after upload
-      ("Upload complete for userId:");
+    .onUploadComplete(async () => {
 
-      ("file url", file.url);
+      console.log("successs");
     }),
 
 

@@ -59,7 +59,6 @@ export default function CreatePost() {
     });
 
     const onSubmit =  (formData: CreatePostForm) => {
-      ("clicked")
       (formData.image, "formdata")
       mutate({
         ...formData,
@@ -89,12 +88,9 @@ export default function CreatePost() {
               onClientUploadComplete={(res) => {
               if(res){
                 setImage(res)
-              // Do something with the response
-              ("Files: ", res);
               toast.success("Upload Completed");}
               }}
               onUploadError={(error: Error) => {
-              // Do something with the error.
               toast.error(`ERROR! ${error.message}`);
               }}
             /> : <Image
