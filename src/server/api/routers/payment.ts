@@ -26,8 +26,8 @@ export const paymentRouter = createTRPCRouter({
                         quantity: 1,
                     },
                 ],
-                success_url: `${env.NEXTAUTH_URL}`,
-                cancel_url: `${env.NEXTAUTH_URL}/cart`,
+                success_url: `${env.DEPLOYMENT_URL}`,
+                cancel_url: `${env.DEPLOYMENT_URL}/cart`,
         })
     }),
     getStripeSession: protectedProcedure
