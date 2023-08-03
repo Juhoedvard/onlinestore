@@ -26,8 +26,9 @@ export const paymentRouter = createTRPCRouter({
                         quantity: 1,
                     },
                 ],
-                success_url: `${env.DEPLOYMENT_URL}`,
-                cancel_url: `${env.DEPLOYMENT_URL}/cart`,
+                ///Change when deploying
+                success_url: `${env.DEPLOY_URL}`,
+                cancel_url: `${env.DEPLOY_URL}/cart`,
         })
     }),
     getStripeSession: protectedProcedure

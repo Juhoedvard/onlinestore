@@ -27,7 +27,7 @@ export const env = createEnv({
     STRIPE_SECRET_KEY: z.string(),
     STRIPE_PRICE_ID: z.string(),
     STRIPE_WEBHOOK_SECRET: z.string(),
-    DEPLOYMENT_URL: z.string(),
+    DEPLOY_URL: z.string(),
   },
 
   /**
@@ -54,7 +54,7 @@ export const env = createEnv({
     STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
     STRIPE_PRICE_ID: process.env.STRIPE_PRICE_ID,
     STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET,
-    DEPLOYMENT_URL: process.env.DEPLOYMENT_URL,
+    DEPLOY_URL: process.env.DEPLOYMENT_URL,
 
 
 
