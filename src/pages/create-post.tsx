@@ -1,8 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
-/* eslint-disable @typescript-eslint/no-floating-promises */
+
 "useClient"
 
 import { api } from "~/utils/api";
@@ -36,7 +33,7 @@ export default function CreatePost() {
       onSuccess: () => {
         void ctx.item.getAll.invalidate()
         toast.success("New post created")
-        router.push("/");
+        router.push("/").catch(console.error);
       },
       onError: (e) => {
         const error = e.data?.zodError?.fieldErrors;

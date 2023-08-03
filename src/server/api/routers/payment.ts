@@ -26,8 +26,7 @@ export const paymentRouter = createTRPCRouter({
                         quantity: 1,
                     },
                 ],
-                ///Change when deploying
-                success_url: `${env.DEPLOY_URL}`,
+                success_url: `${env.DEPLOY_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
                 cancel_url: `${env.DEPLOY_URL}/cart`,
         })
     }),

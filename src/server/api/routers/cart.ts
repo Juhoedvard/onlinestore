@@ -71,5 +71,16 @@ export const cartRouter = createTRPCRouter({
             return cart
         }),
 
+    clearCart: protectedProcedure
+        .mutation( async ({ctx}) => {
+            await ctx.prisma.cart.delete({
+                where: {
+                    userID: ctx.session.user.id
+                }
+            })
+        })
+
+
+
 
 });

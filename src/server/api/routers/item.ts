@@ -1,3 +1,4 @@
+
 import { string, z } from "zod";
 import {
   createTRPCRouter,
@@ -117,6 +118,25 @@ export const itemRouter = createTRPCRouter({
             orderBy: [{ creationDay: "desc"}]
           })
         }),
+
+      soldItem: protectedProcedure
+        .mutation( async ({ ctx}) => {
+          const cart =  await ctx.prisma.cart.findUnique({
+            where: {
+                  userID: ctx.session.user.id
+            }
+            });
+            if(!cart){
+              throw new Error("Cart is empty")
+            }
+
+            await ctx.prisma.item.deleteMany({
+              where: {
+                cartId: cart.id,
+              }
+          })
+        })
+
 
 
 
