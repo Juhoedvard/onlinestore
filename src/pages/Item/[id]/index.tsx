@@ -16,6 +16,7 @@ export default function ItemDetails () {
     const router = useRouter()
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const {data: user} = useSession()
+    const {data: cart} = api.cart.getCart.useQuery()
     const {data: Item, isLoading} = api.item.getOne.useQuery({
         id: router.query.id as string
     },
@@ -37,8 +38,7 @@ export default function ItemDetails () {
     })
 
     const add =(id: string) => {
-        const {data: cart} = api.cart.getCart.useQuery()
-        
+
         if(cart?.userID === Item?.userID){
             toast.info('You can not add your own item to cart')
             return;
