@@ -68,14 +68,14 @@ const Cart:NextPage = () => {
     if(isLoading) return <div>loading...</div>
     return (
         <div className="flex min-h-screen w-full flex-col gap-10 bg-gradient-to-b  text-white bg-[#55656d]">
-            <nav className="flex w-4/5 z-20 top-0 left-0 py-3 px-10 justify-between">
+            <nav className="flex w-4/5 top-0 left-0 py-3 px-10 justify-between">
                 <div>
                     <Link href="/" className="a-link-normal  fixed a-color-tertiary">
                         Back to Home
                     </Link>
                 </div>
-                <div className="flex gap-3  a-color-tertiary">
-                    <h1 className="text-2xl">Copy testcard for payment</h1>
+                <div className="flex gap-3  a-color-tertiary ">
+                    <h1 className="text-2xl ">Copy testcard for payment</h1>
                     <button onClick={async () => {await navigator.clipboard.writeText('42424242424242424444'), toast.success('card copied') }}>
                         <svg className="h-8 w-8 "  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <rect x="8" y="8" width="12" height="12" rx="2" />  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" /></svg>
                     </button>

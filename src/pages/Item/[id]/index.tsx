@@ -1,6 +1,4 @@
 
-"use client"
-
 import { useRouter } from "next/router";
 import { api } from "~/utils/api";
 import  Image  from "next/image";
@@ -9,12 +7,14 @@ import { Loading } from "~/components/LoadingProfile";
 import { toast } from "react-toastify";
 import { useSession } from "next-auth/react";
 import noImage from "../../../../public/noImage.jpg"
-
+import Modal from 'react-modal';
+import { useState } from "react";
 
 export default function ItemDetails () {
 
     const ctx = api.useContext()
     const router = useRouter()
+    const [modalIsOpen, setModalIsOpen] = useState(false);
     const {data: user} = useSession()
     const {data: Item, isLoading} = api.item.getOne.useQuery({
         id: router.query.id as string
@@ -22,15 +22,23 @@ export default function ItemDetails () {
     {
         enabled: !!router.query.id,
     })
-    const {data: cart} = api.cart.getCart.useQuery()
     const {mutate, isLoading: isMutating} = api.cart.addToCart.useMutation({
         onSuccess: () => {
             void ctx.cart.getCart.invalidate()
             toast('Item added to cart')
         }
     })
-    const add =(id: string) => {
+    const {mutateAsync, isLoading: isRemoving} = api.item.deletePost.useMutation({
+        onSuccess: () => {
+            void ctx.item.getAll.invalidate()
+            toast('Item removed from cart')
+            router.push("/").catch(console.error);
+        }
+    })
 
+    const add =(id: string) => {
+        const {data: cart} = api.cart.getCart.useQuery()
+        
         if(cart?.userID === Item?.userID){
             toast.info('You can not add your own item to cart')
             return;
@@ -39,12 +47,24 @@ export default function ItemDetails () {
             toast.info('Item already in cart')
             return;
         }
+        else if(!user){
+            toast.info('You must be logged in to add items to cart')
+            return;
+        }
         mutate({
             id: id,
         })
 
     }
-    if( isLoading) return (<Loading/>)
+    const RemoveItem = async (id : string) => {
+
+        await mutateAsync({
+            id: id,
+        })
+
+
+    }
+    if( isLoading || isRemoving) return (<Loading/>)
     if(Item == null) return( <div>Something went wrong</div>)
 
     return (
@@ -86,7 +106,22 @@ export default function ItemDetails () {
             </div>
             {Item.userID === user?.user.id &&
             <div className="flex justify-end items-end w-1/2 gap-2 px-16">
-                <button className="btn btn-danger w-40" onClick={() => toast('coming soon')}>Remove post</button>
+                <button className="btn btn-danger w-40" onClick={() => setModalIsOpen(true) }>Remove post</button>
+                <Modal
+                    isOpen={modalIsOpen}
+                    ariaHideApp={false}
+                    contentLabel="Example Modal"
+                    className="flex w-full h-full items-center justify-center backdrop-blur-sm ">
+                        <div className="flex flex-col w-1/4 h-1/4 items-center justify-center bg-[#55656d] text-white rounded-2xl gap-4">
+                            <h1 className="text-2xl">Are you sure you want to remove: </h1>
+                            <span className="text-2xl"> {Item.product}</span>
+                            <div className="flex gap-3 ">
+                                <button  onClick={() => setModalIsOpen(false)}className="btn btn-neutral w-40 text-white">No</button>
+                                <button  onClick={() => { RemoveItem(Item.id).catch(console.error),  setModalIsOpen(false)}}className="btn btn-neutral w-40 text-white">Yes</button>
+                            </div>
+                        </div>
+
+                </Modal>
                 <Link href={`/Item/${Item.id}/edit`}className="btn btn-neutral w-40">Edit post</Link>
 
             </div>} </>

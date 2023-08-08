@@ -20,7 +20,12 @@ export default function SearchPage ()  {
 
 
     if(items?.length === 0 ){
-        return <div>No results, try a different </div>
+        return(
+        <main className="grid min-h-screen place-items-center px-6 py-24 bg-[#55656d] text-white">
+            <p>No results, try a different search word </p>
+        </main>
+
+        )
     }
     return(
         <div className="flex min-h-screen flex-col gap-10 bg-gradient-to-b items-center text-white bg-[#55656d]">

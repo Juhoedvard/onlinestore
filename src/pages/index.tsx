@@ -12,7 +12,6 @@ const Home: NextPage = () => {
 
   const {data : allItems, isLoading} = api.item.getAll.useQuery();
   if (isLoading) return <Loading/>
-
   return (
     <>
       <main className="flex min-h-screen flex-col gap-40 bg-gradient-to-b items-center justify-center bg-[#55656d] scroll-smooth text-white">
