@@ -12,7 +12,7 @@ export const NavBar = () =>  {
     const user = Session?.user;
 
     return (
-        <nav className="navbar bg-base-300 w-full z-20 top-0 sticky left-0 py-3 text-white">
+        <nav className="navbar bg-base-300 w-full z-20 top-0 sticky left-0 py-3 text-white  backdrop-blur-lg">
           <div className="flex-1 gap-4 ">
               <Link href="/">Onlinestore</Link>
               <Search/>
@@ -27,7 +27,7 @@ export const NavBar = () =>  {
             ) : (
               <div className="flex gap-2">
                 <div  className="flex items-center gap-4">
-                <Link href="/create-post">Sell an item</Link>
+                <Link href="/create-post" className="invisible md:visible">Sell an item</Link>
                   <span>{user?.name}</span>
                 </div>
                 <div className="dropdown dropdown-end z-[1]">
@@ -53,6 +53,9 @@ export const NavBar = () =>  {
                       <Link href="/cart"className="justify-between">
                         Cart
                       </Link>
+                    </li>
+                    <li>
+                      <Link href="/create-post">Sell</Link>
                     </li>
                     <li onClick={() => void signOut({ callbackUrl: `/` })}><a>Logout</a></li>
                   </ul>

@@ -14,16 +14,19 @@ const Home: NextPage = () => {
   if (isLoading) return <Loading/>
   return (
     <>
-      <main className="flex min-h-screen flex-col gap-40 bg-gradient-to-b items-center justify-center bg-[#55656d] scroll-smooth text-white">
-        <div className="h-0.5 ">
+      <main className="flex min-h-screen flex-col bg-gradient-to-b bg-[#55656d] scroll-smooth text-white">
+        <div className="flex items-center p-8">
+          <h2 className="font-semibold text-4xl md:text-5xl lg:text-7xl">
+            OnlineStore
+          </h2>
         </div>
-        <div className="grid container grid-cols-2 md:grid-cols-2 gap-20 items-center-z-0 ">
+        <div className="grid container gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-8 items-center-z-0 ">
           {allItems?.map((item : Item) => {
             return(
               <div key={item.id} className=" rounded-lg bg-base-100 shadow-xl justify-self-center p-4 translate-y-3 ">
-                <div className="flex flex-col items-center justify-center">
+                <div className="flex flex-col items-center justify-evenly">
                   <h2 className="card-title m-4 justify-center" >{item.product}</h2>
-                   <figure className="h-1/2 m-4">
+                   <figure className="h-80 m-4">
                     {item.image ?
                       <Image
                           loader={() => item.image || ''}
