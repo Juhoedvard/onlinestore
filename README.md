@@ -1,4 +1,4 @@
-# Onlinestore 
+# Onlinestore (Not deployed to anywhere atm)
 
 ## Description:
 
