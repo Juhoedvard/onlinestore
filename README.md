@@ -17,7 +17,6 @@ I used T3-stack to setup the project and following other frameworks:
 - [UpdateThing](https://uploadthing.com/) for imageuploading
 - [Supabase](https://supabase.com/) for database
 
-  Project is being deployed in https://onlinestore-steel.vercel.app/
 
 ## How to install
 
